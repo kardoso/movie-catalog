@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import MovieCard from "./components/MovieCard";
+import { mock_api } from "./mock/movies_result";
+import { mock_api_genres } from "./mock/genres_result";
 
 function App() {
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    setGenres(mock_api_genres.genres);
+  }, [genres]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {mock_api.results.map((result) => (
+        <MovieCard key={result.id} info={result} genres={genres} />
+      ))}
     </div>
   );
 }
