@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import MovieCard from "./components/MovieCard";
-import { mock_api } from "./mock/movies_result";
 import { mock_api_genres } from "./mock/genres_result";
+import MoviesList from "./components/MoviesList";
 
 function App() {
   const [genres, setGenres] = useState([]);
@@ -12,9 +11,7 @@ function App() {
 
   return (
     <div className="App">
-      {mock_api.results.map((result) => (
-        <MovieCard key={result.id} info={result} genres={genres} />
-      ))}
+      <MoviesList genres={genres} />
     </div>
   );
 }

@@ -5,6 +5,7 @@ article {
   width: 100%;
   max-width: 1080px;
   background-color: #EBEBEB;
+  margin: 16px;
 }
 
 img {
