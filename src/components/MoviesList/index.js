@@ -28,7 +28,7 @@ function MoviesList({ genres }) {
     setApiTotalPages(response_movies.total_pages);
     setApiTotalResults(response_movies.total_results);
     setAppPage(1);
-    setAppTotalPages(apiTotalPages * appResultsPerPage);
+    setAppTotalPages(response_movies.total_pages * appResultsPerPage);
     setAppResultOffset(0);
     setMovies(
       response_movies.results.slice(
@@ -111,12 +111,23 @@ function MoviesList({ genres }) {
             <MovieCard key={result.id} info={result} genres={genres} />
           ))
         : null}
-      <button onClick={nextPage} disabled={appPage <= appTotalPages}>
-        Next
-      </button>
-      <button onClick={previousPage} disabled={appPage <= 1}>
-        Previous
-      </button>
+      <div className="buttons-container">
+        <button
+          onClick={previousPage}
+          disabled={appPage <= 1}
+          className="action-button"
+        >
+          {"<"}
+        </button>
+        <p>{`${appPage} / ${appTotalPages}`}</p>
+        <button
+          onClick={nextPage}
+          disabled={appPage >= appTotalPages}
+          className="action-button"
+        >
+          {">"}
+        </button>
+      </div>
     </div>
   );
 }

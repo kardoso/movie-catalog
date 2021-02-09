@@ -3,3 +3,31 @@
   flex-direction: column;
   align-items: center;
 }
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.action-button {
+  padding: 16px;
+  margin: 4px;
+  border-radius: 50%;
+  font-weight: bolder;
+  outline: 0;
+  text-decoration: none;
+  border: none;
+  display: inline-block;
+}
+
+.action-button:enabled {
+  background-color: #226193;
+  color: #3fd8db;
+  cursor: pointer;
+}
+
+.action-button:disabled {
+  background-color: #b4b4b4;
+  color: #226193;
+}
