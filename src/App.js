@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MoviesList from "./components/MoviesList";
 import Header from "./components/Header";
+import MovieInfo from "./components/MovieInfo";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { API_URL, API_KEY } from "./constants";
 
@@ -23,6 +24,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <MoviesList genres={genres} />
+          </Route>
+          <Route path="/movie/:movieId">
+            <MovieInfo />
           </Route>
         </Switch>
       </Router>
