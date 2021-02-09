@@ -121,7 +121,7 @@ function MoviesList({ genres }) {
         >
           {"<"}
         </button>
-        <p>{`${appPage} / ${appTotalPages}`}</p>
+        <p className="page-count">{`${appPage} / ${appTotalPages}`}</p>
         <button
           onClick={nextPage}
           disabled={appPage >= appTotalPages}
