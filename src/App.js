@@ -26,7 +26,7 @@ function App() {
             <MoviesList genres={genres} />
           </Route>
           <Route path="/movie/:movieId">
-            <MovieInfo />
+            <MovieInfo genres={genres} />
           </Route>
         </Switch>
       </Router>

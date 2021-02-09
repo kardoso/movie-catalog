@@ -8,14 +8,15 @@ function MovieCard({ info, genres }) {
     date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
 
   return (
-    <article>
+    <article className="card-container">
       <figure>
         <img
+          className="card-poster"
           src={`https://image.tmdb.org/t/p/w500${info.poster_path}`}
           alt={`${info.title}-poster`}
         />
       </figure>
-      <main>
+      <main className="card-content">
         <Link to={`/movie/${info.id}`} style={{ textDecoration: "none" }}>
           <header className="card-header">
             <h2> {info.title} </h2>
@@ -28,7 +29,7 @@ function MovieCard({ info, genres }) {
         </div>
         <p className="release-date"> {formattedDate} </p>
         <p className="overview"> {info.overview} </p>
-        <footer>
+        <footer className="card-footer">
           <ul>
             {genres
               .filter(({ id }) => info.genre_ids.includes(id))
