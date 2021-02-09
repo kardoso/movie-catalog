@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MoviesList from "./components/MoviesList";
 import Header from "./components/Header";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { API_URL, API_KEY } from "./constants";
 
 function App() {
@@ -15,8 +16,16 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <MoviesList genres={genres} />
+      <Router>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <Header />
+        </Link>
+        <Switch>
+          <Route exact path="/">
+            <MoviesList genres={genres} />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
