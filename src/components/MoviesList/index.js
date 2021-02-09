@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MovieCard from "../MovieCard";
-import { API_URL, API_KEY } from "../../constants";
+import { API_URL, API_KEY, API_LANGUAGE } from "../../constants";
 
 import "./style.css";
 
@@ -20,6 +20,7 @@ function MoviesList({ genres }) {
     const response_movies = await fetch(
       `${API_URL}/discover/movie?${new URLSearchParams({
         api_key: API_KEY,
+        language: API_LANGUAGE,
         page: 1,
       })}`
     ).then((res) => res.json());
@@ -46,6 +47,7 @@ function MoviesList({ genres }) {
     const response_movies = await fetch(
       `${API_URL}/discover/movie?${new URLSearchParams({
         api_key: API_KEY,
+        language: API_LANGUAGE,
         page: newApiPage,
       })}`
     ).then((res) => res.json());

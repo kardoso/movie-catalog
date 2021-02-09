@@ -3,14 +3,17 @@ import MoviesList from "./components/MoviesList";
 import Header from "./components/Header";
 import MovieInfo from "./components/MovieInfo";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { API_URL, API_KEY } from "./constants";
+import { API_URL, API_KEY, API_LANGUAGE } from "./constants";
 
 function App() {
   const [genres, setGenres] = useState([]);
 
   useEffect(async () => {
     const response_genres = await fetch(
-      `${API_URL}/genre/movie/list?${new URLSearchParams({ api_key: API_KEY })}`
+      `${API_URL}/genre/movie/list?${new URLSearchParams({
+        api_key: API_KEY,
+        language: API_LANGUAGE,
+      })}`
     ).then((res) => res.json());
     setGenres(response_genres.genres);
   }, [genres]);

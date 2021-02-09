@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { API_URL, API_KEY } from "../../constants";
+import { API_URL, API_KEY, API_LANGUAGE } from "../../constants";
 import "./style.css";
 
 const MovieInfo = ({ genres }) => {
@@ -11,7 +11,10 @@ const MovieInfo = ({ genres }) => {
 
   useEffect(async () => {
     const response_movie = await fetch(
-      `${API_URL}/movie/${movieId}?${new URLSearchParams({ api_key: API_KEY })}`
+      `${API_URL}/movie/${movieId}?${new URLSearchParams({
+        api_key: API_KEY,
+        language: API_LANGUAGE,
+      })}`
     ).then((res) => res.json());
     setMovie(response_movie);
     const date = new Date(response_movie.release_date);
