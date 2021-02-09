@@ -19,10 +19,11 @@
 .info-header h2 {
   color: #226193;
   text-align: center;
+  font-size: 2em;
 }
 
 .info-header p {
-  font-size: 1.3em;
+  font-size: 1.5em;
   margin-left: 0;
   text-align: center;
 }
@@ -50,6 +51,7 @@
 
 .info-overview {
   margin-bottom: 48px;
+  font-family: "Lato";
 }
 
 .info-complement {
@@ -71,6 +73,7 @@
 
 .info-complement p {
   text-align: center;
+  font-family: "Lato";
 }
 
 .info-footer {
@@ -144,5 +147,9 @@
 
   .info-poster {
     width: 100%;
+  }
+
+  .info-container {
+    align-items: unset;
   }
 }

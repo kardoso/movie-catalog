@@ -98,7 +98,6 @@ const MovieInfo = ({ genres }) => {
           />
         </figure>
       </main>
-      <video></video>
     </article>
   );
 };
