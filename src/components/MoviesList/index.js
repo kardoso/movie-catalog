@@ -59,6 +59,7 @@ function MoviesList({ genres }) {
     setApiPage(newApiPage);
     setAppPage(newAppPage);
     setAppResultOffset(newAppResultsOffset);
+    window.scrollTo(0, 0);
   };
 
   const loadResultsFromFetched = (newAppPage, newAppResultsOffset) => {
@@ -70,6 +71,7 @@ function MoviesList({ genres }) {
     );
     setAppPage(newAppPage);
     setAppResultOffset(newAppResultsOffset);
+    window.scrollTo(0, 0);
   };
 
   const nextPage = async () => {
