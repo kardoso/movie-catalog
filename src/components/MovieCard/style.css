@@ -20,13 +20,13 @@ main {
   width: 100%;
 }
 
-header {
+.card-header {
   background-color: #226193;
   color: #3fd8db;
   padding: 16px 0 8px 86px;
 }
 
-header h2 {
+.card-header h2 {
   font-weight: normal;
 }
 

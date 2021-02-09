@@ -15,7 +15,7 @@ function MovieCard({ info, genres }) {
         />
       </figure>
       <main>
-        <header>
+        <header className="card-header">
           <h2> {info.title} </h2>
         </header>
         <div className="vote-back-circle">

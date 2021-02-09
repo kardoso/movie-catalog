@@ -1,0 +1,9 @@
+.main-header {
+  background-color: #226193;
+  color: #3fd8db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5em;
+  padding: 16px;
+}

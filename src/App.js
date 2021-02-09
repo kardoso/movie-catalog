@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MoviesList from "./components/MoviesList";
+import Header from "./components/Header";
 import { API_URL, API_KEY } from "./constants";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <MoviesList genres={genres} />
     </div>
   );
