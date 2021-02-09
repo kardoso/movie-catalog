@@ -1,94 +1,122 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import MovieCard from "../MovieCard";
 import { API_URL, API_KEY } from "../../constants";
 
-import './style.css'
+import "./style.css";
 
 function MoviesList({ genres }) {
-	const [apiMovies, setApiMovies] = useState([]);
+  const [apiMovies, setApiMovies] = useState([]);
   const [movies, setMovies] = useState([]);
-	const [apiPage, setApiPage] = useState(1);
-	const [apiTotalPages, setApiTotalPages] = useState(0);
-	const [apiTotalResults, setApiTotalResults] = useState(0);
-	const apiResultsPerPage = 20;
-	const [appPage, setAppPage] = useState(1);
-	const appResultsPerPage = 5;
-	const [appTotalPages, setAppTotalPages] = useState(0);
-	const [appResultOffset, setAppResultOffset] = useState(0);
+  const [apiPage, setApiPage] = useState(1);
+  const [apiTotalPages, setApiTotalPages] = useState(0);
+  const [apiTotalResults, setApiTotalResults] = useState(0);
+  const apiResultsPerPage = 20;
+  const [appPage, setAppPage] = useState(1);
+  const appResultsPerPage = 5;
+  const [appTotalPages, setAppTotalPages] = useState(0);
+  const [appResultOffset, setAppResultOffset] = useState(0);
 
   useEffect(async () => {
-		const response_movies = await fetch(
-			`${API_URL}/discover/movie?${new URLSearchParams({api_key: API_KEY, page: 1})}`
-		).then((res) => res.json());
+    const response_movies = await fetch(
+      `${API_URL}/discover/movie?${new URLSearchParams({
+        api_key: API_KEY,
+        page: 1,
+      })}`
+    ).then((res) => res.json());
     setApiMovies(response_movies.results);
-		setApiPage(1);
-		setApiTotalPages(response_movies.total_pages);
-		setApiTotalResults(response_movies.total_results);
-		setAppPage(1);
-		setAppTotalPages(apiTotalPages * appResultsPerPage);
-		setAppResultOffset(0)
-		setMovies(response_movies.results.slice(appResultOffset, appResultOffset + appResultsPerPage));
+    setApiPage(1);
+    setApiTotalPages(response_movies.total_pages);
+    setApiTotalResults(response_movies.total_results);
+    setAppPage(1);
+    setAppTotalPages(apiTotalPages * appResultsPerPage);
+    setAppResultOffset(0);
+    setMovies(
+      response_movies.results.slice(
+        appResultOffset,
+        appResultOffset + appResultsPerPage
+      )
+    );
   }, []);
 
-	const loadResultsFromApi = async (newApiPage, newAppPage, newAppResultsOffset) => {
-		const response_movies = await fetch(
-			`${API_URL}/discover/movie?${new URLSearchParams({api_key: API_KEY, page: newApiPage})}`
-		).then((res) => res.json());
+  const loadResultsFromApi = async (
+    newApiPage,
+    newAppPage,
+    newAppResultsOffset
+  ) => {
+    const response_movies = await fetch(
+      `${API_URL}/discover/movie?${new URLSearchParams({
+        api_key: API_KEY,
+        page: newApiPage,
+      })}`
+    ).then((res) => res.json());
     setApiMovies(response_movies.results);
-		setMovies(response_movies.results.slice(newAppResultsOffset, newAppResultsOffset + appResultsPerPage));
-		setApiPage(newApiPage);
-		setAppPage(newAppPage);
-		setAppResultOffset(newAppResultsOffset);
-	}
+    setMovies(
+      response_movies.results.slice(
+        newAppResultsOffset,
+        newAppResultsOffset + appResultsPerPage
+      )
+    );
+    setApiPage(newApiPage);
+    setAppPage(newAppPage);
+    setAppResultOffset(newAppResultsOffset);
+  };
 
-	const loadResultsFromFetched = (newAppPage, newAppResultsOffset) => {
-		setMovies(apiMovies.slice(newAppResultsOffset, newAppResultsOffset + appResultsPerPage));
-		setAppPage(newAppPage);
-		setAppResultOffset(newAppResultsOffset);
-	}
+  const loadResultsFromFetched = (newAppPage, newAppResultsOffset) => {
+    setMovies(
+      apiMovies.slice(
+        newAppResultsOffset,
+        newAppResultsOffset + appResultsPerPage
+      )
+    );
+    setAppPage(newAppPage);
+    setAppResultOffset(newAppResultsOffset);
+  };
 
-	const nextPage = async () => {
-		if (appPage % 4 === 0) {
-			var newApiPage = apiPage + 1;
-		}
-		let newAppPage = appPage + 1;
+  const nextPage = async () => {
+    if (appPage % 4 === 0) {
+      var newApiPage = apiPage + 1;
+    }
+    let newAppPage = appPage + 1;
 
-		if (appResultOffset === 15) {
-			let newAppResultsOffset = 0;
-			await loadResultsFromApi(newApiPage, newAppPage, newAppResultsOffset);
-		} else {
-			let newAppResultsOffset = appResultOffset + 5;
-			loadResultsFromFetched(newAppPage, newAppResultsOffset);
-		}
-	}
+    if (appResultOffset === 15) {
+      let newAppResultsOffset = 0;
+      await loadResultsFromApi(newApiPage, newAppPage, newAppResultsOffset);
+    } else {
+      let newAppResultsOffset = appResultOffset + 5;
+      loadResultsFromFetched(newAppPage, newAppResultsOffset);
+    }
+  };
 
-	const previousPage = async () => {
-		if (appPage > 4) {
-			var newApiPage = apiPage - 1;
-		}
-		let newAppPage = appPage - 1;
+  const previousPage = async () => {
+    if (appPage > 4) {
+      var newApiPage = apiPage - 1;
+    }
+    let newAppPage = appPage - 1;
 
-		if (appResultOffset === 0) {
-			let newAppResultsOffset = 15;
-			await loadResultsFromApi(newApiPage, newAppPage, newAppResultsOffset)
-		} else {
-			let newAppResultsOffset = appResultOffset - 5;
-			loadResultsFromFetched(newAppPage, newAppResultsOffset);
-		}}
+    if (appResultOffset === 0) {
+      let newAppResultsOffset = 15;
+      await loadResultsFromApi(newApiPage, newAppPage, newAppResultsOffset);
+    } else {
+      let newAppResultsOffset = appResultOffset - 5;
+      loadResultsFromFetched(newAppPage, newAppResultsOffset);
+    }
+  };
 
-	return (
-		<div className='list-container'>
-			{movies ?
-				movies.map((result) => (
-					<MovieCard key={result.id} info={result} genres={genres} />
-				))
-				:
-				null
-			}
-			<button onClick={nextPage} disabled={appPage <= appTotalPages}>Next</button>
-			<button onClick={previousPage} disabled={appPage <= 1}>Previous</button>
-		</div>
-	);
+  return (
+    <div className="list-container">
+      {movies
+        ? movies.map((result) => (
+            <MovieCard key={result.id} info={result} genres={genres} />
+          ))
+        : null}
+      <button onClick={nextPage} disabled={appPage <= appTotalPages}>
+        Next
+      </button>
+      <button onClick={previousPage} disabled={appPage <= 1}>
+        Previous
+      </button>
+    </div>
+  );
 }
 
 export default MoviesList;

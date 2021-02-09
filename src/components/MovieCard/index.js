@@ -1,9 +1,10 @@
-// title, poster, release_date, overview, vote_average, genres
+import React from "react";
 import "./style.css";
 
 function MovieCard({ info, genres }) {
   let date = new Date(info.release_date);
-  let formattedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+  let formattedDate =
+    date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
 
   return (
     <article>
@@ -17,13 +18,13 @@ function MovieCard({ info, genres }) {
         <header>
           <h2> {info.title} </h2>
         </header>
-        <div className='vote-back-circle'>
-          <div className='vote-middle-circle'>
-            <p className='vote-average'> {`${info.vote_average*10}%`} </p>
+        <div className="vote-back-circle">
+          <div className="vote-middle-circle">
+            <p className="vote-average"> {`${info.vote_average * 10}%`} </p>
           </div>
         </div>
-        <p className='release-date'> { formattedDate } </p>
-        <p className='overview'> {info.overview} </p>
+        <p className="release-date"> {formattedDate} </p>
+        <p className="overview"> {info.overview} </p>
         <footer>
           <ul>
             {genres
